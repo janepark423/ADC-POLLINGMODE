@@ -68,23 +68,7 @@ int _write(int fd, char *ptr, int len) {
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 
 	if (huart->Instance == huart3.Instance) {
-		if (myData == '1') {
-			HAL_UART_Transmit(&huart3, &myData, 1, 10);
-			HAL_GPIO_WritePin(LED_ONE_GPIO_Port, LED_ONE_Pin, 1);
 
-		} else if (myData == '2') {
-			HAL_UART_Transmit(&huart3, &myData, 1, 10);
-			HAL_GPIO_WritePin(LED_TWO_GPIO_Port, LED_TWO_Pin, 1);
-
-		} else if (myData == '3') {
-			HAL_UART_Transmit(&huart3, &myData, 1, 10);
-			HAL_GPIO_WritePin(LED_THREE_GPIO_Port, LED_THREE_Pin, 1);
-
-		} else if (myData == '4') {
-			HAL_UART_Transmit(&huart3, &myData, 1, 10);
-			HAL_GPIO_WritePin(GPIOB, LED_ONE_Pin | LED_TWO_Pin | LED_THREE_Pin,
-					0);
-		}
 		HAL_UART_Receive_IT(&huart3, &myData, 1);
 
 	}
@@ -135,7 +119,10 @@ int main(void) {
 		HAL_ADC_PollForConversion(&hadc1, HAL_MAX_DELAY); // conversion이 완료되기를 기다림
 		uint16_t adc_value = HAL_ADC_GetValue(&hadc1);     // ADC 데이터를 읽어 변수에 저장
 		sprintf((char*) buffer, "ADC1-0: %d\n", adc_value); // 이하 UART를 통해 ADC 데이터 출력
-		HAL_UART_Transmit(&huart3, buffer, strlen((char*) buffer), 100);
+		//HAL_UART_Transmit(&huart3, buffer, strlen((char*) buffer), 100);
+		double dNum = adc_value*0.001;
+		printf("%.3fV\r\n ", dNum);
+
 
 		HAL_Delay(1000);
 
