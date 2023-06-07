@@ -118,11 +118,10 @@ int main(void) {
 		HAL_ADC_Start(&hadc1);                 // ADC를 Enable시킨 후 conversion을 시작
 		HAL_ADC_PollForConversion(&hadc1, HAL_MAX_DELAY); // conversion이 완료되기를 기다림
 		uint16_t adc_value = HAL_ADC_GetValue(&hadc1);     // ADC 데이터를 읽어 변수에 저장
-		sprintf((char*) buffer, "ADC1-0: %d\n", adc_value); // 이하 UART를 통해 ADC 데이터 출력
+		//sprintf((char*) buffer, "ADC1-0: %d\n", adc_value); // 이하 UART를 통해 ADC 데이터 출력
 		//HAL_UART_Transmit(&huart3, buffer, strlen((char*) buffer), 100);
-		double dNum = adc_value;
-		double to12Bit = 3.3*1/4096;
-		printf("%.3fv\r\n ", dNum*to12Bit);
+		double dNum = adc_value*(3.3/4096);
+		printf("%.3fv\r\n ", dNum);
 
 
 		HAL_Delay(1000);
