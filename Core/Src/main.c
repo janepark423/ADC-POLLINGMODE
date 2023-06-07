@@ -121,7 +121,8 @@ int main(void) {
 		sprintf((char*) buffer, "ADC1-0: %d\n", adc_value); // 이하 UART를 통해 ADC 데이터 출력
 		//HAL_UART_Transmit(&huart3, buffer, strlen((char*) buffer), 100);
 		double dNum = adc_value*0.001;
-		printf("%.3fV\r\n ", dNum);
+		double to12Bit = dNum*1/4095;
+		printf("%.3fv ____ resolvation :  %.6f \r\n ", dNum, to12Bit);
 
 
 		HAL_Delay(1000);
