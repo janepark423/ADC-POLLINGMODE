@@ -136,10 +136,7 @@ int main(void) {
 		uint16_t adc_value = HAL_ADC_GetValue(&hadc1);     // ADC 데이터를 읽어 변수에 저장
 		sprintf((char*) buffer, "ADC1-0: %d\n", adc_value); // 이하 UART를 통해 ADC 데이터 출력
 		HAL_UART_Transmit(&huart3, buffer, strlen((char*) buffer), 100);
-		printf("buffer 1 is ___%d\r\n", buffer[0]);
-		printf("buffer 2 is ___%d\r\n", buffer[1]);
-		printf("buffer 3 is ___%d\r\n", buffer[2]);
-		printf("buffer 4 is ___%d\r\n", buffer[3]);
+
 		HAL_Delay(1000);
 
 		/* UART TX ?��?�� ?��?��?��
